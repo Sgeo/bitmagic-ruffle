@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>BitMagic Web Player</title>
+        <script defer src="ruffle/ruffle.js"></script>
+        <script defer src="index.js"></script>
+        <style>
+            .centered {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                margin-right: -50%;
+                transform: translate(-50%, -50%);
+            }
+
+            ruffle-player {
+                width: 400px;
+                height: 300px;
+                border-radius: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <input id="file-selector" type="file">
+        <img src="skin.svg" class="centered">
+        <div id="main" class="centered"></div>
+    </body>
+</html>
