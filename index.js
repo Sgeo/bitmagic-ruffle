@@ -3,7 +3,9 @@
     function bmcontrolHandler(url) {
         console.log("bmcontrol:", url);
         if(url === "/bmcontrol/next") {
-            MAIN_ELEMENT.innerHTML = "";
+            setTimeout(function() {
+                MAIN_ELEMENT.innerHTML = "";
+            }, 0);
         }
     }
 
@@ -22,8 +24,9 @@
     window.open = function(...args) {
         if(args[0]?.startsWith("/bmcontrol/")) {
             bmcontrolHandler(args[0]);
+            return window;
         } else {
-            realOpen(this, ...args);
+            return realOpen(this, ...args);
         }
     }
 
