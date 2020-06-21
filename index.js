@@ -9,37 +9,8 @@
         }
     }
 
-    // The below code assumes that Ruffle implements GetURL via a <form> .submit()
-    let realSubmit = HTMLFormElement.prototype.submit;
-    HTMLFormElement.prototype.submit = function(...args) {
-        alert(this.action);
-        if(this.action?.startsWith("/bmcontrol/")) {
-            bmcontrolHandler(this.action);
-        } else {
-            realSubmit.call(this, ...args);
-        }
-    };
-
-    let realOpen = window.open;
-    window.open = function(...args) {
-        if(args[0]?.startsWith("/bmcontrol/")) {
-            bmcontrolHandler(args[0]);
-            return window;
-        } else {
-            return realOpen(this, ...args);
-        }
-    }
-
-    let realWindow = window;
-    window = new Proxy(window, {
-        set: function(obj, prop, newval) {
-            console.log("Set on window");
-            if(prop === "location" && newval?.startsWith?.("/bmcontrol/")) {
-                bmcontrolHandler(newval);
-            } else {
-                realWindow[prop] = newval;
-            }
-        }
+    new BroadcastChannel("bmcontrol").addEventListener("message", function(event) {
+        bmcontrolHandler(event.data);
     });
 
     const FILE_SELECTOR = document.querySelector("#file-selector");
