@@ -1,3 +1,5 @@
+// Unused, needs to be installed in /sw.js, see https://github.com/Sgeo/sgeo.github.io/blob/39a0fb003ffa1a74bdc6b24257d55b6933b6a9b7/sw.js
+
 self.addEventListener('activate', event => {
     event.waitUntil(clients.claim());
 });
