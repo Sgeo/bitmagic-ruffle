@@ -4,15 +4,22 @@
 
     let introBM = null;
 
-    async function bmcontrolHandler(url) {
+    async function intro() {
+        if(currentBMPlayer) {
+            currentBMPlayer.pause();
+        }
+        if(!introBM) {
+            introBM = await fetch("Intro.bm").then(resp => resp.blob());
+        }
+        play_bm(introBM);
+    }
+
+
+
+    function bmcontrolHandler(url) {
         console.log("bmcontrol:", url);
         if(url === "/bmcontrol/next") {
-            currentBMPlayer.pause();
-            if(!introBM) {
-                introBM = await fetch("Intro.bm").then(resp => resp.blob());
-            }
-            play_bm(introBM);
-
+            intro();
         }
     }
 
@@ -107,5 +114,7 @@
             play_bm(file);
         }
     });
+
+    intro();
 
 })();
