@@ -73,14 +73,29 @@
 
     }
 
-    FILE_SELECTOR.addEventListener("change", async function(e) {
+    async function play_bm(file) {
         MAIN_ELEMENT.innerHTML = "";
         let ruffle = RufflePlayer.newest();
         let player = ruffle.createPlayer();
         MAIN_ELEMENT.appendChild(player);
+        player.load({data: await bm_to_swf(file)});
+    }
+
+    FILE_SELECTOR.addEventListener("change", function(e) {
         let file = this.files[0];
         if(file) {
-            player.load({data: await bm_to_swf(file)});
+            play_bm(file);
+        }
+    });
+
+    document.body.addEventListener("dragover", function(e) {
+        e.preventDefault();
+    });
+    document.body.addEventListener("drop", function(e) {
+        let file = e.dataTransfer.items?.[0]?.getAsFile();
+        if(file) {
+            e.preventDefault();
+            play_bm(file);
         }
     });
 
