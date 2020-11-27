@@ -76,11 +76,11 @@
     FILE_SELECTOR.addEventListener("change", async function(e) {
         MAIN_ELEMENT.innerHTML = "";
         let ruffle = RufflePlayer.newest();
-        let player = ruffle.create_player();
+        let player = ruffle.createPlayer();
         MAIN_ELEMENT.appendChild(player);
         let file = this.files[0];
         if(file) {
-            player.play_swf_data(await bm_to_swf(file));
+            player.load({data: await bm_to_swf(file)});
         }
     });
 
