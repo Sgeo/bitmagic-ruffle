@@ -4,6 +4,10 @@
 
     let introBM = null;
 
+    let replayTarget = null; // The most recently played non-intro file
+
+    
+
     async function intro() {
         if(currentBMPlayer) {
             currentBMPlayer.pause();
@@ -15,11 +19,22 @@
     }
 
 
-
+    let paused = false;
     function bmcontrolHandler(url) {
         console.log("bmcontrol:", url);
-        if(url === "/bmcontrol/next") {
+        if(url === "/bmcontrol/next" || url === "/bmcontrol/button/index") {
             intro();
+        } else if(url === "/bmcontrol/button/pause") {
+            if(paused) {
+                currentBMPlayer?.play();
+            } else {
+                currentBMPlayer?.pause();
+            }
+            paused = !paused;
+        } else if(url === "/bmcontrol/button/restart") {
+            if(replayTarget) {
+                play_bm(replayTarget);
+            }
         }
     }
 
@@ -93,7 +108,9 @@
             currentBMPlayer = ruffle.createPlayer();
             MAIN_ELEMENT.appendChild(currentBMPlayer);
         }
-
+        if(file !== introBM) {
+            replayTarget = file;
+        }
         currentBMPlayer.load({data: await bm_to_swf(file)});
     }
 
