@@ -1,11 +1,18 @@
 (function() {
 
-    function bmcontrolHandler(url) {
+    let currentBMPlayer = null;
+
+    let introBM = null;
+
+    async function bmcontrolHandler(url) {
         console.log("bmcontrol:", url);
         if(url === "/bmcontrol/next") {
-            setTimeout(function() {
-                MAIN_ELEMENT.innerHTML = "";
-            }, 0);
+            currentBMPlayer.pause();
+            if(!introBM) {
+                introBM = await fetch("Intro.bm").then(resp => resp.blob());
+            }
+            play_bm(introBM);
+
         }
     }
 
@@ -74,11 +81,13 @@
     }
 
     async function play_bm(file) {
-        MAIN_ELEMENT.innerHTML = "";
-        let ruffle = RufflePlayer.newest();
-        let player = ruffle.createPlayer();
-        MAIN_ELEMENT.appendChild(player);
-        player.load({data: await bm_to_swf(file)});
+        if(!currentBMPlayer) {
+            let ruffle = RufflePlayer.newest();
+            currentBMPlayer = ruffle.createPlayer();
+            MAIN_ELEMENT.appendChild(currentBMPlayer);
+        }
+
+        currentBMPlayer.load({data: await bm_to_swf(file)});
     }
 
     FILE_SELECTOR.addEventListener("change", function(e) {
