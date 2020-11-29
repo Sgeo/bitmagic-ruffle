@@ -1,17 +1,18 @@
-let skinPlayer = null;
-
-export function load_skin() {
-
-}
-
-export function load_skin_swf(ruffle, mainPlayer, skinElement, url) {
-    if(!skinPlayer) {
-        skinPlayer = ruffle.createPlayer();
-        skinElement.appendChild(skinPlayer);
+export class SkinManager {
+    constructor(ruffle, mainPlayer, skinElement) {
+        this.ruffle = ruffle;
+        
+        this.mainPlayer = mainPlayer;
+        this.skinPlayer = ruffle.createPlayer();
+        skinElement.appendChild(this.skinPlayer);
     }
-    skinPlayer.style.width = "640px";
-    skinPlayer.style.height = "452px";
-    mainPlayer.style.width = "400px";
-    mainPlayer.style.height = "300px";
-    skinPlayer.load({url: url, autoplay: "on"});
+
+
+    load_skin_swf(url) {
+        this.skinPlayer.style.width = "640px";
+        this.skinPlayer.style.height = "452px";
+        this.mainPlayer.style.width = "400px";
+        this.mainPlayer.style.height = "300px";
+        this.skinPlayer.load({url: url, autoplay: "on"});
+    }
 }

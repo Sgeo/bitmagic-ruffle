@@ -1,5 +1,7 @@
 
-import { load_skin, load_skin_swf } from "./skin.js";
+import { SkinManager } from "./skin.js";
+
+let skinManager = null;
 
 const RUFFLE = RufflePlayer.newest();
 
@@ -115,7 +117,10 @@ async function play_bm(file) {
         replayTarget = file;
     }
     currentBMPlayer.load({data: await bm_to_swf(file)});
-    load_skin_swf(RUFFLE, currentBMPlayer, SKIN_ELEMENT, "Default.bmm.swf");
+    if(!skinManager) {
+        skinManager = new SkinManager(RUFFLE, currentBMPlayer, SKIN_ELEMENT);
+    }
+    skinManager.load_skin_swf("Default.bmm.swf");
 }
 
 FILE_SELECTOR.addEventListener("change", function(e) {
