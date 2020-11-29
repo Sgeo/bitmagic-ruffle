@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <title>BitMagic Web Player</title>
         <script defer src="ruffle/ruffle.js"></script>
-        <script defer src="index.js"></script>
+        <script type="module" src="index.js"></script>
         <script defer src="activate-sw.js"></script>
         <style>
             .centered {
@@ -14,17 +14,12 @@
                 margin-right: -50%;
                 transform: translate(-50%, -50%);
             }
-
-            ruffle-player {
-                width: 400px;
-                height: 300px;
-            }
             
         </style>
     </head>
     <body>
         <input id="file-selector" type="file">
-        <embed class="centered" src="Default.bmm.swf" width="640" height="452">
+        <div class="centered" id="skin"></div>
         <div>
             <ul>
                 <li>
