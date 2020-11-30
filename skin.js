@@ -11,7 +11,7 @@ const SKINS = {
     "Metal skin": "skins/Metal_skin.bmm",
     "Progress from Above": "skins/PFA.bmm",
     "Sarbakan": "skins/Sarbakan.bmm",
-    "Skin Template": "skins/Skin template.bmm",
+    "Skin Template": "skins/Skin_template.bmm",
     "Stamps": "skins/Stamps.bmm",
     "Watch": "skins/Watch.bmm",
     "Zebra": "skins/Zebra.bmm"
