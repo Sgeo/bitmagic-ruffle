@@ -120,7 +120,7 @@ async function play_bm(file) {
     if(!skinManager) {
         skinManager = new SkinManager(RUFFLE, currentBMPlayer, SKIN_ELEMENT);
     }
-    skinManager.load_skin_swf("Default.bmm.swf");
+    skinManager.load_skin("skins/Default.bmm");
 }
 
 FILE_SELECTOR.addEventListener("change", function(e) {
