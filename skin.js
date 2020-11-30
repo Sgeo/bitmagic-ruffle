@@ -1,4 +1,4 @@
-const FWS4 = 0x46575304; // Search manually for Flash since I currently don't know how else to remove the large skin header
+const FWSx = 0x46575300; // Search manually for Flash since I currently don't know how else to remove the large skin header
 
 const SKINS = {
     "BitPlayer Small": "skins/Default.bmm",
@@ -52,7 +52,7 @@ export class SkinManager {
         let swfIndex;
 
         for(swfIndex = 0; swfIndex < buffer.byteLength; swfIndex++) {
-            if(view.getUint32(swfIndex, false)===FWS4) {
+            if((view.getUint32(swfIndex, false)&0xFFFFFF00)===FWSx) {
                 break;
             }
         }
