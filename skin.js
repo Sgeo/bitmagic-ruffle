@@ -67,4 +67,11 @@ export class SkinManager {
         this.skinPlayer.load({data: swfData});
 
     }
+
+    load_skin_by_name(name) {
+        let url = SKINS[name];
+        if(url) {
+            this.load_skin(url);
+        }
+    }
 }

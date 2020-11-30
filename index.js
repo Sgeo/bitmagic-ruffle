@@ -40,6 +40,10 @@ function bmcontrolHandler(url) {
         if(replayTarget) {
             play_bm(replayTarget);
         }
+    } else if(url.startsWith("/bmcontrol/setskin/")) {
+        let urlName = url.slice("/bmcontrol/setskin/".length);
+        let name = decodeURIComponent(urlName);
+        skinManager?.load_skin_by_name(name);
     }
 }
 
