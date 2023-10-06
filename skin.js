@@ -22,7 +22,11 @@ export class SkinManager {
         this.ruffle = ruffle;
         
         this.mainPlayer = mainPlayer;
-        this.skinPlayer = ruffle.createPlayer();
+        this.skinPlayer = ruffle.createPlayer()
+        this.skinPlayer.config = {
+            "autoplay": "on",
+            "unmuteOverlay": "hidden"
+        };
         skinElement.appendChild(this.skinPlayer);
 
         let skinSelectorList = document.querySelector("#skin-selector ul");

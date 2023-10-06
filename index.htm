@@ -5,7 +5,6 @@
         <title>BitMagic Web Player</title>
         <script defer src="ruffle/ruffle.js"></script>
         <script type="module" src="index.js"></script>
-        <script defer src="activate-sw.js"></script>
         <style>
             .centered {
                 position: absolute;
@@ -18,6 +17,7 @@
         </style>
     </head>
     <body>
+        <div id="navigation-status">Checking Navigation API status...</div>
         <input id="file-selector" type="file">
         <div class="centered" id="skin"></div>
         <div>
