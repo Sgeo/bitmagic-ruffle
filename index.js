@@ -3,7 +3,12 @@ import { SkinManager } from "./skin.js";
 
 let skinManager = null;
 
+RufflePlayer.config = {
+    "allowScriptAccess": true
+};
+
 const RUFFLE = RufflePlayer.newest();
+
 
 let currentBMPlayer = null;
 
@@ -145,3 +150,18 @@ document.body.addEventListener("drop", function(e) {
 intro();
 
 
+if(window.navigation) {
+    document.querySelector("#navigation-status").textContent = "Navigation API enabled.";
+    navigation.addEventListener("navigate", function(e) {
+        if(!e.cancelable) {
+            return;
+        }
+        const url = new URL(e.destination.url);
+        if(url.pathname.startsWith("/bmcontrol/")) {
+            e.preventDefault();
+            bmcontrolHandler(url.pathname);
+        }
+    });
+} else {
+    document.querySelector("#navigation-status").textContent = "The Navigation API is NOT available! This player will not work properly!";
+}
