@@ -47,10 +47,6 @@ function bmcontrolHandler(url) {
     }
 }
 
-new BroadcastChannel("bmcontrol").addEventListener("message", function(event) {
-    bmcontrolHandler(event.data);
-});
-
 const FILE_SELECTOR = document.querySelector("#file-selector");
 const MAIN_ELEMENT = document.querySelector("#main");
 const SKIN_ELEMENT = document.querySelector("#skin");
